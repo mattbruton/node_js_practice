@@ -1,11 +1,9 @@
 "use strict";
 
-var express = require('express');
+const EXPRESS = require('express');
 
-let name = "Matt";
+const APP = EXPRESS();
 
-if (true){
-    console.log(name);
-};
+let port = 5000;
 
-
+APP.listen(port, (err) => console.log(`running server on port ${port}`));
