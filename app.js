@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const EXPRESS = require('express');
 
@@ -9,12 +9,12 @@ let port = 5000;
 APP.use(EXPRESS.static('./public'));
 APP.use(EXPRESS.static('./src/views'));
 
-APP.get("/", (req, res) => {
-    res.send("here's some text");
+APP.get('/', (req, res) => {
+    res.send('here is some text');
 });
 
-APP.get("/books", (req, res) => {
-    res.send("here's some books");
+APP.get('/books', (req, res) => {
+    res.send('here are some books');
 });
 
 APP.listen(port, (err) => console.log(`running server on port ${port}`));
