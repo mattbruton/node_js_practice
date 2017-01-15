@@ -16,8 +16,8 @@ gulp.task('style', () => {
 
 gulp.task('inject', () => {
 
-    let wiredep = require('wiredep').stream;
-    let inject = require('gulp-inject');
+    const wiredep = require('wiredep').stream;
+    const inject = require('gulp-inject');
 
     let injectSrc = gulp.src(['./public/css/*.css',
                               './public/js/*.js'], {read: false});
