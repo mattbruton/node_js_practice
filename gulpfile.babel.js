@@ -1,9 +1,13 @@
-const gulp = require('gulp');
-const jshint = require('gulp-jshint');
-const jscs = require('gulp-jscs');
-const nodemon = require('gulp-nodemon');
+import gulp from 'gulp';
+import jshint from 'gulp-jshint';
+import babel from 'gulp-babel';
+import jscs from 'gulp-jscs';
+import nodemon from 'gulp-nodemon';
 
-const jsFiles = ['*.js', 'src/**/*.js'];
+const jsFiles = [
+    '*.js',
+    'src/**/*.js'
+];
 
 gulp.task('style', () => {
     return gulp.src(jsFiles)
@@ -15,32 +19,38 @@ gulp.task('style', () => {
         .pipe(jscs.reporter());
 });
 
+gulp.task('babel',  () => {
+    return gulp.src('app.js')
+        .pipe(babel())
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('inject', () => {
 
     const wiredep = require('wiredep').stream;
     const inject = require('gulp-inject');
 
-    let injectSrc = gulp.src(['./public/css/*.css',
+    const injectSrc = gulp.src(['./public/css/*.css',
                               './public/js/*.js'], {read: false});
-    let injectOptions = {
+    const injectOptions = {
         ignorePath: '/public'
     };
 
-    let options = {
+    const options = {
         bowerJson: require('./bower.json'),
         directory: './public/lib',
         ignorePath: '../../public'
     };
 
-    return gulp.src('./src/views/*.html')
+    return gulp.src('./src/views/*.jade')
         .pipe(wiredep(options))
         .pipe(inject(injectSrc, injectOptions))
         .pipe(gulp.dest('./src/views'));
 });
 
-gulp.task('serve', ['style', 'inject'], () => {
-    let options = {
-        script: 'app.js',
+gulp.task('serve', ['style', 'inject', 'babel'], () => {
+    const options = {
+        script: './dist/app.js',
         delayTime: 1,
         env: {
             'PORT': 5000
