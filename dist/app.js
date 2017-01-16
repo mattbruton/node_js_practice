@@ -11,10 +11,12 @@ var app = (0, _express2.default)();
 var port = process.env.PORT || 5000;
 
 app.use(_express2.default.static('./public'));
-app.use(_express2.default.static('./src/views'));
+app.set('views', './src/views');
+
+app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.send('here is some text');
+    res.render('index', { title: 'Hello from render!', list: [1, 2, 3, 4] });
 });
 
 app.get('/books', function (req, res) {
