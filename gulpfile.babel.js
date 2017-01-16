@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import jshint from 'gulp-jshint';
+import babel from 'gulp-babel';
 import jscs from 'gulp-jscs';
 import nodemon from 'gulp-nodemon';
 
@@ -18,18 +19,24 @@ gulp.task('style', () => {
         .pipe(jscs.reporter());
 });
 
+gulp.task('babel',  () => {
+    return gulp.src('app.js')
+        .pipe(babel())
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('inject', () => {
 
     const wiredep = require('wiredep').stream;
     const inject = require('gulp-inject');
 
-    let injectSrc = gulp.src(['./public/css/*.css',
+    const injectSrc = gulp.src(['./public/css/*.css',
                               './public/js/*.js'], {read: false});
-    let injectOptions = {
+    const injectOptions = {
         ignorePath: '/public'
     };
 
-    let options = {
+    const options = {
         bowerJson: require('./bower.json'),
         directory: './public/lib',
         ignorePath: '../../public'
@@ -41,9 +48,9 @@ gulp.task('inject', () => {
         .pipe(gulp.dest('./src/views'));
 });
 
-gulp.task('serve', ['style', 'inject'], () => {
-    let options = {
-        script: 'app.js',
+gulp.task('serve', ['style', 'inject', 'babel'], () => {
+    const options = {
+        script: './dist/app.js',
         delayTime: 1,
         env: {
             'PORT': 5000
