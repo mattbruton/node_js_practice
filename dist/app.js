@@ -16,7 +16,13 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.render('index', { title: 'Hello from render!', list: [1, 2, 3, 4] });
+    res.render('index', { title: 'Hello from render', nav: [{
+            link: '/books',
+            text: 'Books'
+        }, {
+            link: '/authors',
+            text: 'Authors'
+        }] });
 });
 
 app.get('/books', function (req, res) {
