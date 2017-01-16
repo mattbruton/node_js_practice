@@ -4,7 +4,7 @@ const EXPRESS = require('express');
 
 const APP = EXPRESS();
 
-let port = 5000;
+let port = process.env.PORT || 5000;
 
 APP.use(EXPRESS.static('./public'));
 APP.use(EXPRESS.static('./src/views'));
