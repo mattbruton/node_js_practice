@@ -14,12 +14,12 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     res.render('index', {title: 'Hello from render',nav:
                                                     [{
-                                                        link: '/books',
-                                                        text: 'Books'
+                                                        Link: '/books',
+                                                        Text: 'Books'
                                                     },
                                                     {
-                                                        link: '/authors',
-                                                        text: 'Authors'
+                                                        Link: '/authors',
+                                                        Text: 'Authors'
                                                     }]});
 });
 
