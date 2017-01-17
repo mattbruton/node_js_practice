@@ -14,31 +14,31 @@ var bookRouter = _express2.default.Router();
 
 var books = [{
     id: 0,
-    title: 'Book 1',
+    title: 'Advanced Boiling',
     genre: 'Cooking',
     author: 'Dogman McCatface',
     read: false
 }, {
     id: 1,
-    title: 'Book 2',
+    title: 'Learn To Tie Your Shoes in Just Six Years',
     genre: 'Self-Help',
     author: 'Fishman Birdface',
     read: true
 }, {
     id: 2,
-    title: 'Book 3',
+    title: 'McDonald\'s Forgot My Napkins and Other Scary First World Problems',
     genre: 'Nonfiction',
     author: 'Birdman McDogface',
     read: false
 }, {
     id: 3,
-    title: 'Book 4',
+    title: 'Contact 2: Payday',
     genre: 'Science Fiction',
     author: 'Kitty Dogford',
     read: true
 }, {
     id: 4,
-    title: 'Book 5',
+    title: 'Zerba, Context',
     genre: 'Biography',
     author: 'Zerba Zerberson',
     read: false
