@@ -7,9 +7,35 @@ var _express2 = _interopRequireDefault(_express);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
+var bookRouter = _express2.default.Router();
 
 var port = process.env.PORT || 5000;
-var bookRouter = _express2.default.Router();
+var books = [{
+    title: 'Book 1',
+    genre: 'Cooking',
+    author: 'Dogman McCatface',
+    read: false
+}, {
+    title: 'Book 2',
+    genre: 'Self-Help',
+    author: 'Fishman Birdface',
+    read: true
+}, {
+    title: 'Book 3',
+    genre: 'Nonfiction',
+    author: 'Birdman McDogface',
+    read: false
+}, {
+    title: 'Book 4',
+    genre: 'Science Fiction',
+    author: 'Kitty Dogford',
+    read: true
+}, {
+    title: 'Book 5',
+    genre: 'Biography',
+    author: 'Zerba Zerberson',
+    read: false
+}];
 
 app.use(_express2.default.static('./public'));
 app.set('views', './src/views');
@@ -25,7 +51,8 @@ bookRouter.route('/').get(function (req, res) {
         }, {
             Link: '/authors',
             Text: 'Authors'
-        }]
+        }],
+        books: books
     });
 });
 
