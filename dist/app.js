@@ -9,14 +9,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var app = (0, _express2.default)();
 
 var port = process.env.PORT || 5000;
+var bookRouter = _express2.default.Router();
 
 app.use(_express2.default.static('./public'));
 app.set('views', './src/views');
 
 app.set('view engine', 'ejs');
 
-app.get('/', function (req, res) {
-    res.render('index', {
+bookRouter.route('/').get(function (req, res) {
+    res.render('books', {
         title: 'Hello from render',
         nav: [{
             Link: '/books',
@@ -28,8 +29,22 @@ app.get('/', function (req, res) {
     });
 });
 
-app.get('/books', function (req, res) {
-    res.send('here are some books');
+bookRouter.route('/single').get(function (req, res) {
+    res.send('Hello, Single Book');
+});
+
+app.use('/Books', bookRouter);
+app.get('/', function (req, res) {
+    res.render('index', {
+        title: 'Hello from render',
+        nav: [{
+            Link: '/books',
+            Text: 'Books'
+        }, {
+            Link: '/authors',
+            Text: 'Authors'
+        }]
+    });
 });
 
 app.listen(port, function (err) {
