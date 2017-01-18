@@ -2,11 +2,14 @@
 
 import express from 'express';
 
-import bookRouter from './routes/bookRoutes';
-
 const app = express();
-
 let port = process.env.PORT || 5000;
+let nav = [
+    {Link: '/books', Text: 'Books'},
+    {Link: '/authors', Text: 'Authors'}
+    ];
+
+const bookRouter = require('./routes/bookRoutes')(nav);
 
 app.use(express.static('./public'));
 app.set('views', './src/views');
