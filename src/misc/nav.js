@@ -1,6 +1,6 @@
 'use strict';
 
-let nav = [
+const nav = [
     {Link: '/books', Text: 'Books'},
     {Link: '/authors', Text: 'Authors'}
 ];
