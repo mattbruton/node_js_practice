@@ -7,9 +7,10 @@ let port = process.env.PORT || 5000;
 let nav = [
     {Link: '/books', Text: 'Books'},
     {Link: '/authors', Text: 'Authors'}
-    ];
+];
 
 const bookRouter = require('./routes/bookRoutes')(nav);
+const adminRouter = require('./routes/adminRoutes')(nav);
 
 app.use(express.static('./public'));
 app.set('views', './src/views');
@@ -17,6 +18,7 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.use('/Books', bookRouter);
+app.use('/Admin', adminRouter);
 
 app.get('/', (req, res) => {
     res.render('index', {
