@@ -16,6 +16,7 @@ const router = (nav) => {
                         nav: nav,
                         books: results
                     });
+                    db.close();
                 });
             });
         });
@@ -32,6 +33,7 @@ const router = (nav) => {
                         nav: nav,
                         book: results
                     });
+                    db.close();
                 });
             });
         });
