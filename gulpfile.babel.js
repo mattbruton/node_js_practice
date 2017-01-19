@@ -20,7 +20,7 @@ gulp.task('style', () => {
 });
 
 gulp.task('babel',  () => {
-    return gulp.src('app.js')
+    return gulp.src(['app.js', 'src/*/*.js'])
         .pipe(babel())
         .pipe(gulp.dest('dist'));
 });
