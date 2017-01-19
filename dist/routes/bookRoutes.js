@@ -21,6 +21,7 @@ var router = function router(nav) {
                     nav: nav,
                     books: results
                 });
+                db.close();
             });
         });
     });
@@ -36,6 +37,7 @@ var router = function router(nav) {
                     nav: nav,
                     book: results
                 });
+                db.close();
             });
         });
     });
