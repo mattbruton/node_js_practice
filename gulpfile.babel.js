@@ -20,7 +20,7 @@ gulp.task('style', () => {
 });
 
 gulp.task('babel',  () => {
-    return gulp.src(['app.js', 'src/*/*.js'])
+    return gulp.src(['app.js', 'src/*/*/*.js'])
         .pipe(babel())
         .pipe(gulp.dest('dist'));
 });
@@ -50,7 +50,7 @@ gulp.task('inject', () => {
 
 gulp.task('serve', ['style', 'inject', 'babel'], () => {
     const options = {
-        script: './dist/app.js',
+        script: './app.js',
         delayTime: 1,
         env: {
             'PORT': 5000

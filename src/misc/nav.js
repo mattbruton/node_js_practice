@@ -5,4 +5,4 @@ const nav = [
     {Link: '/authors', Text: 'Authors'}
 ];
 
-export default nav;
+module.exports = nav;
