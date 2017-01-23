@@ -1,10 +1,16 @@
-let express =  require('express');
+const express =  require('express'),
+    mongodb = require('mongodb').MongoClient,
+    ObjectId = require('mongodb').ObjectID;
 
 const bookRouter = express.Router();
-const mongodb = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectID;
 
 const router = (nav) => {
+    bookRouter.use(function(req, res, next) {
+        if (!req.user) {
+            res.redirect('/');
+        }
+        next();
+    });
     bookRouter.route('/')
         .get((req, res) => {
             let url = 'mongodb://localhost:27017/libraryApp';
