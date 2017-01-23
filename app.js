@@ -1,23 +1,26 @@
 'use strict';
 
-import express from 'express';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import passport from 'passport';
-import session from 'express-session';
+let express = require('express'),
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    passport = require('passport'),
+    session = require('express-session'),
+    nav = require('./src/misc/nav');
 
-import nav from './misc/nav';
-
-const bookRouter = require('./routes/bookRoutes')(nav);
-const adminRouter = require('./routes/adminRoutes')(nav);
-const authRouter = require('./routes/authRoutes')(nav);
+const bookRouter = require('./src/routes/bookRoutes')(nav),
+    adminRouter = require('./src/routes/adminRoutes')(nav),
+    authRouter = require('./src/routes/authRoutes')(nav);
 
 const app = express();
+
 let port = process.env.PORT || 5000;
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(session({secret: 'bigSecret', saveUninitialized: true, resave: true}));
+require('./src/config/passport.js')(app);
 
 app.set('views', './src/views');
 

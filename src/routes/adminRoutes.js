@@ -1,9 +1,9 @@
-import express from 'express';
-const mongodb = require('mongodb').MongoClient;
+const express = require('express'),
+    mongodb = require('mongodb').MongoClient;
 
 const adminRouter = express.Router();
 
-let books = [
+const books = [
         {
             title: 'Advanced Boiling',
             genre: 'Cooking',
