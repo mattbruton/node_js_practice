@@ -1,7 +1,9 @@
-const express = require('express'),
-    mongodb = require('mongodb').MongoClient;
+'use strict';
 
-const adminRouter = express.Router();
+const express = require('express'),
+    mongodb = require('mongodb').MongoClient,
+    adminRouter = express.Router(),
+    libraryAppUrl = require('../misc/urls/libraryAppUrl');
 
 const books = [
         {
@@ -39,8 +41,7 @@ const books = [
 const router = (nav) => {
     adminRouter.route('/addBooks')
         .get((req, res) => {
-            let url = 'mongodb://localhost:27017/libraryApp';
-            mongodb.connect(url, (err, db) => {
+            mongodb.connect(libraryAppUrl, (err, db) => {
                 let collection = db.collection('books');
                 collection.insertMany(books, (err, results) => {
                     res.send(results);

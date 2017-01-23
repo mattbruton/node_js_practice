@@ -1,24 +1,26 @@
+'use strict';
+
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    mongodb = require('mongodb').MongoClient;
+    mongodb = require('mongodb').MongoClient,
+    libraryAppUrl = require('../../misc/urls/libraryAppUrl');
 
-module.exports = function () {
+module.exports = () => {
     passport.use(new LocalStrategy({
         usernameField: 'userName',
         passwordField: 'password'
     }, function (username, password, done) {
-         let url = 'mongodb://localhost:27017/libraryApp';
-            mongodb.connect(url, (err, db) => {
-                let collection = db.collection('users');
-                collection.findOne({username: username},
-                function(err, results) {
-                    if (results.password === password) {
-                        let user = results;
-                        done(null, user);
-                    } else {
-                        done(null, false, {message: 'Bad Password'});
-                    }
-                });
+        mongodb.connect(libraryAppUrl, (err, db) => {
+            let collection = db.collection('users');
+            collection.findOne({username: username},
+            function(err, results) {
+                if (results.password === password) {
+                    let user = results;
+                    done(null, user);
+                } else {
+                    done(null, false, {message: 'Bad Password'});
+                }
             });
+        });
     }));
 };
