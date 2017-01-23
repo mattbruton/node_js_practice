@@ -1,14 +1,13 @@
 const express = require('express'),
     passport = require('passport'),
-    mongodb = require('mongodb').MongoClient;
-
-const authRouter = express.Router();
+    mongodb = require('mongodb').MongoClient,
+    authRouter = express.Router(),
+    libraryAppUrl = require('../misc/urls/libraryAppUrl');
 
 const router = () => {
     authRouter.route('/signUp')
         .post(function(req, res) {
-            let url = 'mongodb://localhost:27017/libraryApp';
-            mongodb.connect(url, (err, db) => {
+            mongodb.connect(libraryAppUrl, (err, db) => {
                 let collection  = db.collection('users');
                 let user = {
                     username: req.body.userName,
@@ -32,7 +31,7 @@ const router = () => {
 
     authRouter.route('/profile')
         .all(function(req, res, next) {
-            if(!req.user) {
+            if (!req.user) {
                 res.redirect('/');
             }
             next();

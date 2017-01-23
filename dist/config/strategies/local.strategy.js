@@ -2,15 +2,15 @@
 
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    mongodb = require('mongodb').MongoClient;
+    mongodb = require('mongodb').MongoClient,
+    libraryAppUrl = require('../../misc/urls/libraryAppUrl');
 
 module.exports = function () {
     passport.use(new LocalStrategy({
         usernameField: 'userName',
         passwordField: 'password'
     }, function (username, password, done) {
-        var url = 'mongodb://localhost:27017/libraryApp';
-        mongodb.connect(url, function (err, db) {
+        mongodb.connect(libraryAppUrl, function (err, db) {
             var collection = db.collection('users');
             collection.findOne({ username: username }, function (err, results) {
                 if (results.password === password) {

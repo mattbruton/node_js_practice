@@ -45,4 +45,4 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(port, (err) => console.log(`running server on port ${port}`));
+app.listen(port, err => console.log(`running server on port ${port}`));
