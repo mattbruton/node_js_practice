@@ -7,9 +7,9 @@ const mongodb = require('mongodb').MongoClient,
 const bookController = (bookService, nav) => {
 
     const middleware = (req, res, next) => {
-        if (!req.user) {
-            res.redirect('/');
-        }
+        // if (!req.user) {
+        //     res.redirect('/');
+        // }
         next();
     };
 
@@ -29,14 +29,17 @@ const bookController = (bookService, nav) => {
 
     const getById = function(req, res) {
         let id = new ObjectId(req.params.id);
-        mongodb.connect(libraryAppUrl, (err, db) => {
+        mongodb.connect(libraryAppUrl, function(err, db) {
             let collection = db.collection('books');
-            collection.findOne({_id: id} ,(err, results) => {
-                res.render('bookView', {
-                    title: results.title,
-                    nav: nav,
-                    book: results
-                });
+            collection.findOne({_id: id}, function(err, results) {
+                bookService.getBookById(results.bookId,
+                    function(err, book) {
+                        res.render('bookView', {
+                            title: results.title,
+                            nav: nav,
+                            book: results
+                        });
+                    });
                 db.close();
             });
         });

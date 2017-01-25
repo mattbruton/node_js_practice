@@ -7,7 +7,7 @@ const express = require('express'),
 const router = () => {
     authRouter.route('/signUp')
         .post(function(req, res) {
-            mongodb.connect(libraryAppUrl, (err, db) => {
+            mongodb.connect(libraryAppUrl, function(err, db) {
                 let collection  = db.collection('users');
                 let user = {
                     username: req.body.userName,

@@ -7,8 +7,8 @@ const express =  require('express'),
     bookRouter = express.Router();
 
 const router = nav => {
-
-    const bookController = require('../controllers/bookController')(null, nav);
+    const bookService = require('../services/goodreadsService')();
+    const bookController = require('../controllers/bookController')(bookService, nav);
 
     bookRouter.use(bookController.middleware);
     bookRouter.route('/')
